@@ -51,3 +51,5 @@
 /home/alexmerced/development/Teaching/blogprojects/firstapi/bin/Debug/net5.0/Microsoft.Extensions.DependencyModel.dll
 /home/alexmerced/development/Teaching/blogprojects/firstapi/bin/Debug/net5.0/Newtonsoft.Json.dll
 /home/alexmerced/development/Teaching/blogprojects/firstapi/bin/Debug/net5.0/System.IO.Pipelines.dll
+/home/alexmerced/development/Teaching/blogprojects/firstapi/bin/Debug/net5.0/Humanizer.dll
+/home/alexmerced/development/Teaching/blogprojects/firstapi/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Design.dll

@@ -30,16 +30,16 @@ namespace firstapi
         {
 
             services.AddControllers();
+
+            // Setup our datanase connection string and add our database connection
+            var connectionString = Configuration["DbContextSettings:ConnectionString"];
+            services.AddDbContext<PersonContext>(opt => opt.UseNpgsql(
+                connectionString));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "firstapi", Version = "v1" });
 
-                services.AddMvc();
-
-                // Setup our datanase connection string and add our database connection
-                var connectionString = Configuration["DbContextSettings:ConnectionString"];
-                Console.WriteLine(connectionString);
-                services.AddDbContext<PersonContext>(opt => opt.UseNpgsql(connectionString));
             });
         }
 
@@ -60,7 +60,10 @@ namespace firstapi
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            {
+            {   
+                // This is for attribute routing
+                endpoints.MapControllers();
+                // This is for Pattern Routing
                 endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

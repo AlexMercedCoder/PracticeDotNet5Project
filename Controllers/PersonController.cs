@@ -6,7 +6,8 @@ using System.Linq;
 
 namespace firstapi.Controllers
 {
-   public class PersonController
+    [Route("people")]
+    public class PersonController
     {
         private readonly PersonContext People;
 
@@ -14,12 +15,36 @@ namespace firstapi.Controllers
             People = people;
         }
 
+        [HttpGet]
         public IEnumerable<Person> index(){
             return People.Persons.ToList();
         }
 
+        [HttpPost]
         public IEnumerable<Person> Post([FromBody]Person person){
             People.Persons.Add(person);
+            People.SaveChanges();
+            return People.Persons.ToList();
+        }
+
+        [HttpGet("{id}")]
+        public Person show(long id){
+            return People.Persons.FirstOrDefault(x => x.Id == id);
+        }
+
+        [HttpPut("{id}")]
+        public IEnumerable<Person> update([FromBody]Person person, long id){
+            Person oldPerson = People.Persons.FirstOrDefault(x => x.Id == id);
+            oldPerson.Name = person.Name;
+            oldPerson.age = person.age;
+            People.SaveChanges();
+            return People.Persons.ToList();
+        }
+
+        [HttpDelete("{id}")]
+        public IEnumerable<Person> destroy(long id){
+            Person oldPerson = People.Persons.FirstOrDefault(x => x.Id == id);
+            People.Persons.Remove(oldPerson);
             People.SaveChanges();
             return People.Persons.ToList();
         }
