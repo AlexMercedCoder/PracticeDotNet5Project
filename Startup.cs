@@ -38,6 +38,7 @@ namespace firstapi
 
                 // Setup our datanase connection string and add our database connection
                 var connectionString = Configuration["DbContextSettings:ConnectionString"];
+                Console.WriteLine(connectionString);
                 services.AddDbContext<PersonContext>(opt => opt.UseNpgsql(connectionString));
             });
         }
